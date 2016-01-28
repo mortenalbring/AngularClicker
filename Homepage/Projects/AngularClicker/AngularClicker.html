@@ -17,31 +17,73 @@
                 </button>
             </div>
             <div ng-show="started" class="gamecontainer">
+                <div>
+
+
+                    <div class="shop-container">
+
+                        <div class="shop">
+                            <div ng-repeat="item in Shop | orderBy:'Cost'">
+                                <button ng-click="item.RunFunction()" ng-disabled="item.Cost > Player.Gold">
+                                    [{{item.Cost}} G] {{item.Title}}
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div>
+
+
+
+                    <h2>Enemies</h2>
+                    <div class="enemycontainer">
+                        
+                        <div ng-repeat="enemy in Enemies" class="enemy" ng-click="manualAttack(enemy.ID)">
+
+
+
+                            <div ng-if="enemy.Alive && enemy.Type == 'Mouse'" enemy-mouse
+                                 ng-style="{'color':getColour(enemy)}">
+                            </div>
+                            <div class="dead" ng-if="!enemy.Alive && enemy.Type == 'Mouse'" dead-mouse></div>
+
+                            <div ng-if="enemy.Alive && enemy.Type == 'Gravedigger'" grave-digger
+                                 ng-style="{'color':getColour(enemy)}"></div>
+
+                            <div class="dead" ng-if="!enemy.Alive && enemy.Type == 'Gravedigger'" dead-grave-digger></div>
+                        </div>
+
+                    </div>
+
+
+                    <div ng-repeat="message in MessageLog.slice().reverse() | limitTo:10 track by $index ">
+                        {{message}}
+                    </div>
+                </div>
 
 
                 <div class="playerContainer">
-                    <div class="shop">
-                        <div ng-repeat="item in Shop | orderBy:'Cost'">
-                            <button ng-click="item.RunFunction()" ng-disabled="item.Cost > Player.Gold">
-                                [{{item.Cost}} G] {{item.Title}}
-                            </button>
-                        </div>
-                    </div>
-             
+
                     <div class="player">
                         {{Player.Name}}
-                        <br/>
+                        <br />
                         <div player-face ng-click="surprisePlayer()" pstatus="Player.Status"></div>
+
+
+                    </div>
+                    <div>
                         <small>XP - {{Player.XP}}</small>
                         <br />
                         <small>Gold - {{Player.Gold}}</small>
                         <br />
                         <small>Attack damage - {{Player.AttackDamage}}</small>
                         <br />
-
-
                     </div>
-                    <div class="character" ng-if="Player.AutoBury"><span>Gravedigger</span>
+                    <div class="character" ng-if="Player.AutoBury">
+                        <span>Gravedigger</span>
                         <div grave-digger></div>
                     </div>
 
@@ -50,47 +92,13 @@
 
 
                 </div>
-
-
-
-                <h2>Enemies</h2>
-                <div class="enemycontainer">
-
-                    <div ng-repeat="enemy in Enemies" class="enemy" ng-click="manualAttack(enemy.ID)">
-
-
-
-                        <div ng-if="enemy.Alive && enemy.Type == 'Mouse'" enemy-mouse
-                             ng-style="{'color':getColour(enemy)}">
-                        </div>
-                        <div class="dead" ng-if="!enemy.Alive && enemy.Type == 'Mouse'" dead-mouse></div>
-
-                        <div  ng-if="enemy.Alive && enemy.Type == 'Gravedigger'" grave-digger
-                             ng-style="{'color':getColour(enemy)}"></div>
-
-                        <div class="dead" ng-if="!enemy.Alive && enemy.Type == 'Gravedigger'" dead-grave-digger></div>
-                    </div>
-
-                </div>
-
-
-                <div ng-repeat="message in MessageLog.slice().reverse() | limitTo:10 track by $index ">
-                    {{message}}
-                </div>
             </div>
-            
+
         </div>
     </div>
 
 
-    
-<pre>
-   )
-   (
- ()-()
-_(o o)_  
- /\o/\
-</pre>
+
 
     <script src="angular.min.js"></script>
     <script src="AngularClickerEnemyService.js"></script>

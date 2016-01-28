@@ -1,5 +1,19 @@
+.gamecontainer {
+    display:flex;    
+}
+.shop-container {
+    padding:2em;
+}
+
 .playercontainer {
+    padding:10px;
     display:flex;
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#d9d9d9;
+    border-top:1px solid #ccc;
 }
 .enemycontainer {
     display:flex;
@@ -58,6 +72,7 @@ pre {
     padding-left:20px;     
     width:150px;
     border:1px solid #ccc;
+    font-size:2em;
 }
 
 
